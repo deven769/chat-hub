@@ -11,8 +11,13 @@
 	docker compose up --build -d
 
 2. After server up: Open index.html in browser from
-	chat-application/frontend/index.html
+	chat-hub/frontend/index.html
 
+
+## For Testing use following users to login:
+	1. username: user           password: admin
+	2. username: user1          password: admin
+	3. username: user2          password: admin
 
 
 ## DESCRIPTION
