@@ -3,12 +3,16 @@
 ## Running server with Docker
 
 1. Command to up container
-
-	docker compose up --build 
-
+	
+	docker compose up
+	
 	or 
 
-	docker compose up --build -d
+	docker compose up --build
+	
+
+	NOTE: make sure your host port is not running on 6379
+
 
 2. After server up: Open index.html in browser from
 	chat-hub/frontend/index.html
