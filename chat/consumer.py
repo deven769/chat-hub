@@ -11,7 +11,7 @@ User = get_user_model()
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = "chat_room"
+        self.room_name = "chat_room"  ## static for now, can be dynamic
         self.room_group_name = f"chat_{self.room_name}"
 
         # Get the token from the URL parameters

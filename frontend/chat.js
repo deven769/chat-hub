@@ -1,11 +1,10 @@
 let socket;
-let token = localStorage.getItem('token') || '';  // Retrieve token from localStorage
-let username = localStorage.getItem('username') || '';  // Retrieve username from localStorage
+let token = localStorage.getItem('token') || '';
+let username = localStorage.getItem('username') || '';
 
 
 document.addEventListener('DOMContentLoaded', function () {
     if (token) {
-        // If token exists, directly initialize the WebSocket and load messages
         initWebSocket();
         loadMessages();
         document.getElementById('login-container').style.display = 'none';
@@ -30,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let debounceTimeout;
 
     searchInput.addEventListener('input', function () {
-        clearTimeout(debounceTimeout); // Clear previous timeout
-        debounceTimeout = setTimeout(() => searchMessages(), 300);  // Debounce to delay the search request
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => searchMessages(), 300);
     });
 });
 
@@ -53,9 +52,8 @@ function login() {
         console.log("Login response:", data);
         if (data.access) {
             token = data.access;
-            _username = username;
             localStorage.setItem('token', token);  // Store token in localStorage
-            localStorage.setItem('username', _username);  // Store token in localStorage
+            localStorage.setItem('username', username);  // Store token in localStorage
             console.log("JWT Token received:", token);
             initWebSocket();
             loadMessages();
@@ -143,24 +141,26 @@ function addMessageToChat(user, message, timestamp) {
 
     // Create a span for the username with the green color
     const usernameElement = document.createElement('span');
-    usernameElement.className = 'username';  // Apply green color class
-    usernameElement.textContent = user;       // Set the username text
+    usernameElement.className = 'username';
+    usernameElement.textContent = user;
 
     // Check if the message is from the logged-in user
-    if (user === username) {
-        messageElement.className = 'message-right';  // Apply right-side style for logged-in user
+    const loggedInUsername = localStorage.getItem('username');
+    if (user === loggedInUsername) {
+        messageElement.className = 'message-right';
     } else {
-        messageElement.className = 'message-left';   // Apply left-side style for other users
+        messageElement.className = 'message-left';
     }
 
     // Set the message content with the formatted time and username
-    messageElement.innerHTML = `[${formattedTime}] `; // Set the timestamp first
-    messageElement.appendChild(usernameElement); // Append the username element
-    messageElement.innerHTML += `: ${message}`; // Add the message text
+    messageElement.innerHTML = `[${formattedTime}] `;
+    messageElement.appendChild(usernameElement);
+    messageElement.innerHTML += `: ${message}`;
 
     messagesDiv.appendChild(messageElement);
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
+
 
 function formatTime(timestamp) {
     const date = new Date(timestamp);
@@ -270,5 +270,5 @@ document.getElementById('logout-btn').addEventListener('click', function () {
 function redirectToLogin() {
     document.getElementById('login-container').style.display = 'block';
     document.getElementById('chat-container').style.display = 'none';
-    alert('Session expired. Please log in again.');
+    // alert('Session expired. Please log in again.');
 }
