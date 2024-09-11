@@ -27,4 +27,6 @@ COPY . /app/
 EXPOSE 8000
 
 # Start the Daphne server
-CMD ["daphne", "-p", "8000", "--bind", "0.0.0.0", "chatapp.asgi:application"]
+#CMD ["daphne", "-p", "8000", "--bind", "0.0.0.0", "chatapp.asgi:application"]
+
+CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && daphne -p 8000 --bind 0.0.0.0 chatapp.asgi:application"]

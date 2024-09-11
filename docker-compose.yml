@@ -1,12 +1,14 @@
-version: '3.8'
+version: '3.9'  # Updated to a supported version of Docker Compose
 
 services:
-  web:
-    build: .
+  backend:
+    build:
+      context: ./backend  # Point to the backend directory
+      dockerfile: Dockerfile  # No need to specify the full path; it's relative to context
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./backend:/app
     environment:
       - DJANGO_SETTINGS_MODULE=chatapp.settings
     depends_on:
@@ -16,3 +18,12 @@ services:
     image: redis:alpine
     ports:
       - "6379:6379"
+
+  frontend:
+    build:
+      context: ./frontend  # Point to the frontend directory
+      dockerfile: Dockerfile  # Again, relative to context
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html

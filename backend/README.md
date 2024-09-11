@@ -31,5 +31,5 @@
  	in a default room (which is static). Message sent by authenticated user is saved
  	to sqlite database for data persistance. 
 
- 	Frontend uses html, css and javascript which can be access at http://localhost:3000
+ 	Frontend uses html, css and javascript which can be access by opening index.html
  	in browser. 
